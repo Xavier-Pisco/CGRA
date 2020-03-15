@@ -40,19 +40,19 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.ambientLight = 0.3;
         this.objectComplexity = 0.5;
-        this.scaleFactor = 2.0;
+        this.scaleFactor = 1.0;
 
     }
     initLights() {
 
-        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        this.lights[0].setPosition(0, 0, 5.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setPosition(0.0, 0.0, 5.0, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
         this.lights[1].disable();
@@ -123,6 +123,13 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        // Wood
+        this.wood = new CGFappearance(this);
+        this.wood.setAmbient(0.2, 0.2, 0.2, 1.0);
+        this.wood.setDiffuse(63/255, 42/255, 20/255, 1.0);
+        this.wood.setSpecular(0.15, 0.1, 0.05, 1.0);
+        this.wood.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -136,10 +143,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.wood, this.customMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3, 'Custom': 4 };
     }
     display() {
         this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
