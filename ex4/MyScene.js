@@ -25,10 +25,12 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
+        this.unitCube = new MyUnitCubeQuad(this);
 
         //Display booleans
         this.displayQuad = false;
         this.displayTangram = false;
+        this.displayUnitCube = true;
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -136,12 +138,14 @@ class MyScene extends CGFscene {
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
         
-        // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+        //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         if (this.displayQuad)
             this.quad.display();
         if (this.displayTangram)
             this.tangram.display();
+        if (this.displayUnitCube)
+            this.unitCube.display();
 
         // ---- END Primitive drawing section
     }
