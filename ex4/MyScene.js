@@ -24,6 +24,11 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
+        this.tangram = new MyTangram(this);
+
+        //Display booleans
+        this.displayQuad = false;
+        this.displayTangram = false;
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -35,24 +40,34 @@ class MyScene extends CGFscene {
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
         //------
 
+        
+        this.tangramMaterial = new CGFappearance(this);
+        this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tangramMaterial.setShininess(10.0);
+        this.tangramMaterial.loadTexture('images/tangram.png');
+        this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
         //------ Textures
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.texture4 = new CGFtexture(this, 'images/tangram.png');
         //-------
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.scaleFactor = 5;
+        this.scaleFactor = 2;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
 
-        this.textures = [this.texture1, this.texture2, this.texture3];
+        this.textures = [this.texture1, this.texture2, this.texture3, this.texture4];
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
-        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2 };
+        this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2, 'Tangram': 3 };
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 
@@ -79,11 +94,13 @@ class MyScene extends CGFscene {
     //Function that resets selected texture in quadMaterial
     updateAppliedTexture() {
         this.quadMaterial.setTexture(this.textures[this.selectedTexture]);
+        this.tangramMaterial.setTexture(this.textures[this.selectedTexture]);
     }
 
     //Function that updates wrapping mode in quadMaterial
     updateTextureWrapping() {
         this.quadMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
+        this.tangramMaterial.setTextureWrap(this.wrappingMethods[this.wrapS], this.wrappingMethods[this.wrapT]);
     }
 
     //Function that updates texture coordinates in MyQuad
@@ -121,7 +138,10 @@ class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
+        if (this.displayQuad)
+            this.quad.display();
+        if (this.displayTangram)
+            this.tangram.display();
 
         // ---- END Primitive drawing section
     }
