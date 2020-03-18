@@ -55,5 +55,6 @@ class MyUnitCubeQuad extends CGFobject {
         this.material.setTexture(this.botTexture);
         this.material.apply();
         this.quad.display();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
     }
 }
