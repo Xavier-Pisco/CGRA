@@ -14,12 +14,10 @@ uniform sampler2D uSampler2;
 uniform float normScale;
 
 void main() {
-	vec3 offset;
-
 	vTextureCoord = aTextureCoord;
 
-	if (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b > 0.3)
-		offset=aVertexNormal*0.01*sin(timeFactor);
+	float val = texture2D(uSampler2, vec2(0.0, timeFactor*0.02) + vTextureCoord).b;
+	vec3 offset = aVertexNormal*val*0.03;
 
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
