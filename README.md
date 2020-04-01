@@ -2,5 +2,3 @@
 
 Cada pasta está associada a uma ficha.
 A pasta lib é obigatória para correr qualquer exercício.
-
-**2nd exercise not finished** needs a commit but done.
